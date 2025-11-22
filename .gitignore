@@ -1,5 +1,0 @@
-kernel-main/node_modules/
-kernel-main/.next/
-kernel-main/.env
-kernel-main/.env.local
-kernel-main/*.log
