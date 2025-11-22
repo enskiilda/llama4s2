@@ -118,6 +118,10 @@ export class RealtimeSession {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+          "Pragma": "no-cache",
+          "Expires": "0",
+          "Connection": "keep-alive",
         },
         body: JSON.stringify(payload),
         signal: abortController.signal,
