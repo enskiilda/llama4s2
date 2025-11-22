@@ -11,10 +11,6 @@ const nextConfig: NextConfig = {
   compress: false,
   poweredByHeader: false,
   generateEtags: false,
-  onDemandEntries: {
-    maxInactiveAge: 1000 * 60 * 60,
-    pagesBufferLength: 2,
-  },
 };
 
 export default nextConfig;

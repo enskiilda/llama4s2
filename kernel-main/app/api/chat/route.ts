@@ -977,9 +977,12 @@ SCREEN: ${width}×${height} pixels | Aspect ratio: 4:3 | Origin: (0,0) at TOP-LE
       "Pragma": "no-cache",
       "Expires": "0",
       "X-Accel-Buffering": "no",
+      "Connection": "keep-alive",
+      "Transfer-Encoding": "chunked",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "*",
+      "Access-Control-Max-Age": "0",
     },
   });
 }
