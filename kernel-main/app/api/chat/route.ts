@@ -13,9 +13,7 @@ const ONKERNEL_API_KEY = "sk_85dd38ea-b33f-45b5-bc33-0eed2357683a.t2lQgq3Lb6DamE
 const kernelClient = new Kernel({ apiKey: ONKERNEL_API_KEY });
 
 export const runtime = 'nodejs';
-export const maxDuration = 3600;
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 
 import { parseTextToolCall } from './route_parser';
 
@@ -311,10 +309,6 @@ export async function POST(request: Request) {
           const jsonLine = JSON.stringify(event) + "\n";
           const chunk = encoder.encode(jsonLine);
           controller.enqueue(chunk);
-          // Force immediate flush - no buffering
-          if ((controller as any).flush) {
-            (controller as any).flush();
-          }
         } catch (err) {
           console.error("Error sending event:", err);
         }
@@ -323,13 +317,8 @@ export async function POST(request: Request) {
       const sendText = (text: string) => {
         if (isStreamClosed) return;
         try {
-          // Add newline after text so frontend can process it immediately
           const chunk = encoder.encode(text + "\n");
           controller.enqueue(chunk);
-          // Force immediate flush - no buffering
-          if ((controller as any).flush) {
-            (controller as any).flush();
-          }
         } catch (err) {
           console.error("Error sending text:", err);
         }
@@ -984,12 +973,8 @@ SCREEN: ${width}×${height} pixels | Aspect ratio: 4:3 | Origin: (0,0) at TOP-LE
   return new Response(stream, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "no-cache, no-store, must-revalidate, max-age=0",
-      "Pragma": "no-cache",
-      "Expires": "0",
+      "Cache-Control": "no-cache",
       "X-Accel-Buffering": "no",
-      "Transfer-Encoding": "chunked",
-      "Connection": "keep-alive",
     },
   });
 }
