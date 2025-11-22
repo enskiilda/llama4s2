@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-dialog', '@radix-ui/react-label', '@radix-ui/react-slot', '@radix-ui/react-tooltip'],
   },
+  compress: false,
+  poweredByHeader: false,
+  generateEtags: false,
 };
 
 export default nextConfig;
